@@ -131,26 +131,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-z7-AaU">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-z7-AaU">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-Mk-MuJ">
-                                        <rect key="frame" x="20" y="20" width="393" height="759"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-Mk-MuJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" name="YP Black"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="16"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
                                     </imageView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="WRt-Mk-MuJ" firstAttribute="top" secondItem="dNT-z7-AaU" secondAttribute="top" id="AKC-t3-h1n"/>
-                                    <constraint firstAttribute="bottom" secondItem="WRt-Mk-MuJ" secondAttribute="bottom" id="RY5-gm-QQr"/>
-                                    <constraint firstItem="WRt-Mk-MuJ" firstAttribute="leading" secondItem="dNT-z7-AaU" secondAttribute="leading" id="cvP-TP-DM5"/>
-                                    <constraint firstAttribute="trailing" secondItem="WRt-Mk-MuJ" secondAttribute="trailing" id="lkZ-pj-975"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="v4F-4x-0fi" id="MbB-cz-o2J"/>
                                 </connections>
@@ -184,12 +173,10 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="dNT-z7-AaU" firstAttribute="leading" secondItem="yNm-6m-TWV" secondAttribute="leading" id="JWK-05-y05"/>
-                            <constraint firstItem="WRt-Mk-MuJ" firstAttribute="width" secondItem="WvL-gp-Kdo" secondAttribute="width" id="MYy-Ye-LkA"/>
                             <constraint firstItem="dNT-z7-AaU" firstAttribute="bottom" secondItem="yNm-6m-TWV" secondAttribute="bottom" id="N07-Eu-zWg"/>
                             <constraint firstItem="AHa-E4-JMp" firstAttribute="centerX" secondItem="yNm-6m-TWV" secondAttribute="centerX" id="P5l-0L-I0q"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="bottom" secondItem="AHa-E4-JMp" secondAttribute="bottom" constant="30" id="Pm2-Db-aLP"/>
                             <constraint firstItem="wDu-aI-38p" firstAttribute="top" secondItem="yNm-6m-TWV" secondAttribute="top" constant="16" id="WTA-gY-IwC"/>
-                            <constraint firstItem="WRt-Mk-MuJ" firstAttribute="height" secondItem="WvL-gp-Kdo" secondAttribute="height" multiplier="0.890845" id="Whj-LV-SYH"/>
                             <constraint firstItem="wDu-aI-38p" firstAttribute="leading" secondItem="WvL-gp-Kdo" secondAttribute="leadingMargin" constant="16" id="hPc-1M-Frr"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="trailing" secondItem="dNT-z7-AaU" secondAttribute="trailing" id="o6X-lp-2dP"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="top" secondItem="dNT-z7-AaU" secondAttribute="top" id="ufq-P3-nPI"/>
