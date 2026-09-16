@@ -69,6 +69,11 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		FFF3D3263052E2050036982F /* Profile */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Profile;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +104,7 @@
 		FF262000304C326A0029F76C = {
 			isa = PBXGroup;
 			children = (
+				FFF3D3263052E2050036982F /* Profile */,
 				FFA44D8130529A0800875B72 /* Info.plist */,
 				FFA44D4D305287C200875B72 /* Resources */,
 				FFA44D47305287AB00875B72 /* Scenes */,
@@ -138,6 +144,7 @@
 				FFA44D463052878A00875B72 /* Application */,
 				FFA44D47305287AB00875B72 /* Scenes */,
 				FFA44D4D305287C200875B72 /* Resources */,
+				FFF3D3263052E2050036982F /* Profile */,
 			);
 			name = ImageFeedProject;
 			packageProductDependencies = (
