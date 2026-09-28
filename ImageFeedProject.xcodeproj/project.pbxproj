@@ -27,8 +27,18 @@
 		FF262009304C326A0029F76C /* ImageFeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF262022304C326B0029F76C /* ImageFeedProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-
+		FF2AF4DB306A988F000FBA2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ImageFeedProject/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FF2AF4DA306A9675000FBA2D /* Exceptions for "Resources" folder in "ImageFeedProject" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = FF262008304C326A0029F76C /* ImageFeedProject */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FF262025304C326B0029F76C /* ImageFeedProjectTests */ = {
@@ -53,6 +63,9 @@
 		};
 		FFA44D4D305287C200875B72 /* Resources */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FF2AF4DA306A9675000FBA2D /* Exceptions for "Resources" folder in "ImageFeedProject" target */,
+			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -91,6 +104,7 @@
 		FF262000304C326A0029F76C = {
 			isa = PBXGroup;
 			children = (
+				FF2AF4DB306A988F000FBA2D /* Info.plist */,
 				FFF3D3263052E2050036982F /* Profile */,
 				FFA44D4D305287C200875B72 /* Resources */,
 				FFA44D47305287AB00875B72 /* Scenes */,
@@ -300,6 +314,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageFeedProject/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -336,6 +351,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageFeedProject/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
