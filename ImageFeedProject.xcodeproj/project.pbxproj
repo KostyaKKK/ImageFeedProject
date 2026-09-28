@@ -6,11 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		FFD1863930506CD0008735F2 /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD1863230506CD0008735F2 /* ImagesListViewController.swift */; };
-		FFD1865B30507686008735F2 /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFD1865A30507683008735F2 /* ImagesListCell.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		FF262023304C326B0029F76C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -32,12 +27,11 @@
 		FF262009304C326A0029F76C /* ImageFeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF262022304C326B0029F76C /* ImageFeedProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FFD1863230506CD0008735F2 /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
-		FFD1865A30507683008735F2 /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		FF2AF4DB306A988F000FBA2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ImageFeedProject/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		FF262034304C326B0029F76C /* Exceptions for "ImageFeedProject" folder in "ImageFeedProject" target */ = {
+		FF2AF4DA306A9675000FBA2D /* Exceptions for "Resources" folder in "ImageFeedProject" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -47,14 +41,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		FF26200B304C326A0029F76C /* ImageFeedProject */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				FF262034304C326B0029F76C /* Exceptions for "ImageFeedProject" folder in "ImageFeedProject" target */,
-			);
-			path = ImageFeedProject;
-			sourceTree = "<group>";
-		};
 		FF262025304C326B0029F76C /* ImageFeedProjectTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ImageFeedProjectTests;
@@ -63,6 +49,29 @@
 		FF26202F304C326B0029F76C /* ImageFeedProjectUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ImageFeedProjectUITests;
+			sourceTree = "<group>";
+		};
+		FFA44D463052878A00875B72 /* Application */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Application;
+			sourceTree = "<group>";
+		};
+		FFA44D47305287AB00875B72 /* Scenes */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		FFA44D4D305287C200875B72 /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FF2AF4DA306A9675000FBA2D /* Exceptions for "Resources" folder in "ImageFeedProject" target */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FFF3D3263052E2050036982F /* Profile */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -95,8 +104,11 @@
 		FF262000304C326A0029F76C = {
 			isa = PBXGroup;
 			children = (
-				FF26200B304C326A0029F76C /* ImageFeedProject */,
-				FFD1865C305076A2008735F2 /* ImagesList */,
+				FF2AF4DB306A988F000FBA2D /* Info.plist */,
+				FFF3D3263052E2050036982F /* Profile */,
+				FFA44D4D305287C200875B72 /* Resources */,
+				FFA44D47305287AB00875B72 /* Scenes */,
+				FFA44D463052878A00875B72 /* Application */,
 				FF262025304C326B0029F76C /* ImageFeedProjectTests */,
 				FF26202F304C326B0029F76C /* ImageFeedProjectUITests */,
 				FF26200A304C326A0029F76C /* Products */,
@@ -111,15 +123,6 @@
 				FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		FFD1865C305076A2008735F2 /* ImagesList */ = {
-			isa = PBXGroup;
-			children = (
-				FFD1865A30507683008735F2 /* ImagesListCell.swift */,
-				FFD1863230506CD0008735F2 /* ImagesListViewController.swift */,
-			);
-			path = ImagesList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +141,10 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				FF26200B304C326A0029F76C /* ImageFeedProject */,
+				FFA44D463052878A00875B72 /* Application */,
+				FFA44D47305287AB00875B72 /* Scenes */,
+				FFA44D4D305287C200875B72 /* Resources */,
+				FFF3D3263052E2050036982F /* Profile */,
 			);
 			name = ImageFeedProject;
 			packageProductDependencies = (
@@ -266,8 +272,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFD1865B30507686008735F2 /* ImagesListCell.swift in Sources */,
-				FFD1863930506CD0008735F2 /* ImagesListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,9 +315,11 @@
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeedProject/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -346,10 +352,12 @@
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeedProject/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (

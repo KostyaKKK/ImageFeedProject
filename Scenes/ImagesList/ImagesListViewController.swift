@@ -1,27 +1,40 @@
 import UIKit
 
+//MARK: - Constant
+private enum Constants {
+    static let showSingleImageSegueIdentifier = "ShowSingleImage"
+}
+
 final class ImagesListViewController: UIViewController {
-    
     // MARK: - Outlets
-    
     @IBOutlet private var tableView: UITableView!
-    
     // MARK: - Properties
-    
     private let photosName = Array(0..<20).map{ "\($0)" }
-    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
-        
         return formatter
     }()
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.showSingleImageSegueIdentifier {
+            guard
+                let viewController = segue.destination as? SingleImageViewController,
+                let indexPath = tableView.indexPathForSelectedRow
+            else {
+                assertionFailure("Invalid segue destination")
+                return
+            }
+            let image = UIImage(named: photosName[indexPath.row])
+            viewController.image = image
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
     }
     // MARK: - Private methods
     private func setupTableView() {
@@ -31,7 +44,6 @@ final class ImagesListViewController: UIViewController {
     }
 }
 // MARK: - UITableViewDataSource
-
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photosName.count
@@ -55,14 +67,14 @@ extension ImagesListViewController: UITableViewDelegate {
         guard let image = UIImage(named: photosName[indexPath.row]) else {
             return 0
         }
-        
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
-        
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
         let imageWidth = image.size.width
         let scale = imageViewWidth / imageWidth
         let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
-        
         return cellHeight
     }
-}
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            performSegue(withIdentifier: Constants.showSingleImageSegueIdentifier, sender: indexPath)
+        }
+    }
