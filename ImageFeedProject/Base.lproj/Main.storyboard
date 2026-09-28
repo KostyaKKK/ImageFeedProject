@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -69,9 +68,9 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="YP Black"/>
                                         <connections>
-                                            <outlet property="cellImage" destination="jIU-Nd-x4w" id="Ng7-Yp-XXG"/>
                                             <outlet property="dateLabel" destination="ZAd-Gr-uom" id="JTI-1p-lVX"/>
                                             <outlet property="likeButton" destination="eD8-qS-G5v" id="kHg-O8-G4H"/>
+                                            <outlet property="photoImageView" destination="jIU-Nd-x4w" id="EdP-gI-1Ly"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
