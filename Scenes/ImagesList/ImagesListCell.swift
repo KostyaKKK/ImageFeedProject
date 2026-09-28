@@ -17,7 +17,7 @@ final class ImagesListCell: UITableViewCell {
         super.awakeFromNib()
         
         photoImageView.layer.cornerRadius = 16
-        photoImageView.layer.masksToBounds = true // Обязательно, чтобы обрезать содержимое по границам[span_1](start_span)[span_1](end_span)
+        photoImageView.layer.masksToBounds = true
     }
 }
 
