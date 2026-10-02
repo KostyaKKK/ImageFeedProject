@@ -1,11 +1,13 @@
 import UIKit
 
 //MARK: - Constant
-private enum Constants {
-    static let showSingleImageSegueIdentifier = "ShowSingleImage"
-}
+
 
 final class ImagesListViewController: UIViewController {
+    
+    private enum Constants {
+        static let showSingleImageSegueIdentifier = "ShowSingleImage"
+    }
     // MARK: - Outlets
     @IBOutlet private var tableView: UITableView!
     // MARK: - Properties

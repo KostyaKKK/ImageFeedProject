@@ -6,6 +6,16 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF589306BE567000FBA2D /* WebViewViewController.swift */; };
+		FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */; };
+		FF9B4013306D3995006FBB2A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF293CD7306D26D600659B40 /* WebKit.framework */; };
+		FF9B4015306E4F24006FBB2A /* OAuth2Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B4014306E4F21006FBB2A /* OAuth2Service.swift */; };
+		FF9B4017306E5163006FBB2A /* URLSession+data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B4016306E515E006FBB2A /* URLSession+data.swift */; };
+		FF9B4019306E53CF006FBB2A /* OAuth2TokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B4018306E53BD006FBB2A /* OAuth2TokenStorage.swift */; };
+		FF9B401C306E6961006FBB2A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF9B401B306E6032006FBB2A /* SplashViewController.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FF262023304C326B0029F76C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,7 +37,14 @@
 		FF262009304C326A0029F76C /* ImageFeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF262022304C326B0029F76C /* ImageFeedProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF293CD7306D26D600659B40 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		FF2AF4DB306A988F000FBA2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ImageFeedProject/Info.plist; sourceTree = "<group>"; };
+		FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		FF2AF589306BE567000FBA2D /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		FF9B4014306E4F21006FBB2A /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
+		FF9B4016306E515E006FBB2A /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
+		FF9B4018306E53BD006FBB2A /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
+		FF9B401B306E6032006FBB2A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -81,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9B4013306D3995006FBB2A /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +122,9 @@
 		FF262000304C326A0029F76C = {
 			isa = PBXGroup;
 			children = (
+				FF9B401A306E600A006FBB2A /* SplashViewController */,
+				FF293CD5306D0B7E00659B40 /* Frameworks */,
+				FF2AF587306BE4F5000FBA2D /* Auth */,
 				FF2AF4DB306A988F000FBA2D /* Info.plist */,
 				FFF3D3263052E2050036982F /* Profile */,
 				FFA44D4D305287C200875B72 /* Resources */,
@@ -123,6 +144,34 @@
 				FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FF293CD5306D0B7E00659B40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF293CD7306D26D600659B40 /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF2AF587306BE4F5000FBA2D /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				FF9B4018306E53BD006FBB2A /* OAuth2TokenStorage.swift */,
+				FF9B4016306E515E006FBB2A /* URLSession+data.swift */,
+				FF9B4014306E4F21006FBB2A /* OAuth2Service.swift */,
+				FF2AF589306BE567000FBA2D /* WebViewViewController.swift */,
+				FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		FF9B401A306E600A006FBB2A /* SplashViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FF9B401B306E6032006FBB2A /* SplashViewController.swift */,
+			);
+			path = SplashViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,6 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF9B4015306E4F24006FBB2A /* OAuth2Service.swift in Sources */,
+				FF9B401C306E6961006FBB2A /* SplashViewController.swift in Sources */,
+				FF9B4019306E53CF006FBB2A /* OAuth2TokenStorage.swift in Sources */,
+				FF9B4017306E5163006FBB2A /* URLSession+data.swift in Sources */,
+				FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */,
+				FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +368,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../../../../../../Users/konstantinkascheev/Desktop/копии/ImageFeedProject/Auth",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeedProject/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
@@ -350,6 +409,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6V3N8RQ52B;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/../../../../../../../../../Users/konstantinkascheev/Desktop/копии/ImageFeedProject/Auth",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ImageFeedProject/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
