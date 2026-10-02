@@ -42,31 +42,24 @@ final class AuthViewController: UIViewController {
 // MARK: - WebViewViewControllerDelegate
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        vc.dismiss(animated: true) { [weak self] in
+        navigationController?.popViewController(animated: true)
+ 
+        oauth2Service.fetchOAuthToken(code: code) { [weak self] result in
             guard let self = self else { return }
             
-            self.fetchOAuthToken(code) { result in
-                switch result {
-                case .success(let token):
-                    self.tokenStorage.token = token
-                    print("[AuthViewController]: Successfully fetched and stored OAuth token.")
-                    self.delegate?.didAuthenticate(self)
-                    
-                case .failure(let error):
-                    print("[AuthViewController]: Failed to fetch OAuth token with error - \(error.localizedDescription)")
-                }
+            switch result {
+            case .success(let token):
+                self.tokenStorage.token = token
+                print("[AuthViewController]: Successfully fetched and stored OAuth token.")
+                self.delegate?.didAuthenticate(self)
+                
+            case .failure(let error):
+                print("[AuthViewController]: Failed to fetch OAuth token with error - \(error.localizedDescription)")
             }
         }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        vc.dismiss(animated: true)
-    }
-}
-
-// MARK: - Private Methods
-extension AuthViewController {
-    private func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
-        oauth2Service.fetchOAuthToken(code: code, completion: completion)
+        navigationController?.popViewController(animated: true)
     }
 }

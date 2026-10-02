@@ -198,7 +198,7 @@
             <objects>
                 <viewController id="oDX-Gr-cAF" customClass="ProfileViewController" customModule="ImageFeedProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rcl-DF-YaZ">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="735"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="Oaq-F3-f5D"/>
                         <color key="backgroundColor" name="YP Black"/>
@@ -251,7 +251,6 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdk-zf-nxj">
                                 <rect key="frame" x="16" y="646" width="361" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="288" id="3mu-b1-dVp"/>
                                     <constraint firstAttribute="height" constant="48" id="FIH-0A-h6M"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
@@ -273,7 +272,6 @@
                         <constraints>
                             <constraint firstItem="qdk-zf-nxj" firstAttribute="leading" secondItem="Iw6-f9-bw8" secondAttribute="leading" constant="16" id="5V3-Ru-VbE"/>
                             <constraint firstItem="Iw6-f9-bw8" firstAttribute="bottom" secondItem="qdk-zf-nxj" secondAttribute="bottom" constant="124" id="Ka3-bp-LLV"/>
-                            <constraint firstItem="qdk-zf-nxj" firstAttribute="centerX" secondItem="aty-9k-eRa" secondAttribute="centerX" id="Knc-VQ-xcv"/>
                             <constraint firstItem="6d9-5b-0bl" firstAttribute="centerX" secondItem="aty-9k-eRa" secondAttribute="centerX" id="S0d-Tw-3Ve"/>
                             <constraint firstItem="Iw6-f9-bw8" firstAttribute="trailing" secondItem="qdk-zf-nxj" secondAttribute="trailing" constant="16" id="nlT-Ce-IMu"/>
                             <constraint firstItem="6d9-5b-0bl" firstAttribute="centerY" secondItem="aty-9k-eRa" secondAttribute="centerY" id="zRE-Eb-QAQ"/>

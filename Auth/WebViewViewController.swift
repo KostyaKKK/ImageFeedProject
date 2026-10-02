@@ -26,17 +26,19 @@ final class WebViewViewController: UIViewController {
     }
     
     private func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {return}
-
+        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {        print("[WebViewViewController]: Failed to create URLComponents from string: \(WebViewConstants.unsplashAuthorizeURLString)")
+            return }
+        
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
             URLQueryItem(name: "response_type", value: "code"),
             URLQueryItem(name: "scope", value: Constants.accessScope)
         ]
-        if let query = urlComponents.percentEncodedQuery {
-                urlComponents.percentEncodedQuery = query.replacingOccurrences(of: "%2B", with: "+")
-            }
+        guard let url = urlComponents.url else {
+            print("[WebViewViewController]: Failed to construct URL from URLComponents")
+            return
+        }
         guard let url = urlComponents.url else {return}
         
         let request = URLRequest(url: url)

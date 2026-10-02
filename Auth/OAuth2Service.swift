@@ -31,10 +31,10 @@ final class OAuth2Service {
     private init() {}
     
     // MARK: - Private Methods
-    
-    /// Создает URLRequest для получения авторизационного токена
+
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") else {
+            print("[OAuth2Service]: Failed to create URLComponents for OAuth token request")
             return nil
         }
         
@@ -47,6 +47,7 @@ final class OAuth2Service {
         ]
         
         guard let authTokenUrl = urlComponents.url else {
+            print("[OAuth2Service]: Failed to get URL from URLComponents")
             return nil
         }
         
@@ -54,6 +55,7 @@ final class OAuth2Service {
         request.httpMethod = "POST"
         return request
     }
+
     
     // MARK: - Public Methods
     
