@@ -38,39 +38,36 @@ final class OAuth2Service {
             dataStorage.token = newValue
         }
     }
-
+private final class Box<T> {
+        var value: T
+        init(_ value: T) { self.value = value }
+    }
     private init() { }
     
     func fetchOAuthToken(_ code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         
-        // Проверка гонки запросов (Race Condition)
-        if task != nil {
-            if lastCode != code {
-                task?.cancel()
-            } else {
-                completion(.failure(AuthServiceError.invalidRequest))
-                return
-            }
-        } else {
-            if lastCode == code {
-                completion(.failure(AuthServiceError.invalidRequest))
-                return
-            }
-        }
-        
+        guard lastCode != code else {
+            print("[OAuth2Service.fetchOAuthToken]: InvalidRequest - Duplicate code [code: \(code)]")
+            completion(.failure(AuthServiceError.invalidRequest))
+            return }
+
+        task?.cancel()
         lastCode = code
         
         guard let request = makeOAuthTokenRequest(code: code) else {
+            print("[OAuth2Service.fetchOAuthToken]: RequestError - Failed to create URLRequest [code: \(code)]")
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
-        
-        // Используем универсальный objectTask(for:) из расширения URLSession
-        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+        let taskBox = Box<URLSessionTask?>(nil)
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in 
             guard let self = self else { return }
-            
-            // Сбрасываем состояние после завершения запроса
+            if let currentTask = taskBox.value {
+                guard self.task?.taskIdentifier == currentTask.taskIdentifier else {
+                    return
+                }
+            }
             self.task = nil
             self.lastCode = nil
             
@@ -80,11 +77,11 @@ final class OAuth2Service {
                 self.authToken = authToken
                 completion(.success(authToken))
             case .failure(let error):
-                print("[OAuth2Service.fetchOAuthToken]: Ошибка - \(error.localizedDescription)")
+                print("[OAuth2Service.fetchOAuthToken]: NetworkError - \(error.localizedDescription) [code: \(code)]")
                 completion(.failure(error))
             }
         }
-        
+        taskBox.value = task
         self.task = task
         task.resume()
     }

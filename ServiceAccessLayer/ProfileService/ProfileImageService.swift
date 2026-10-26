@@ -53,15 +53,14 @@ final class ProfileImageService {
         task?.cancel()
         
         guard let token = tokenStorage.token else {
-            print("[ProfileImageService.fetchProfileImageURL]: Error - Auth token is missing")
+            print("[ProfileImageService.fetchProfileImageURL]: InvalidRequest - Auth token is missing [username: \(username)]")
             completion(.failure(AuthServiceError.invalidRequest))
             return
         }
         
         guard let request = makeProfileImageRequest(username: username, token: token) else {
-            print("[ProfileImageService.fetchProfileImageURL]: RequestError - Failed to create URLRequest")
+            print("[ProfileImageService.fetchProfileImageURL]: RequestError - Failed to create URLRequest [username: \(username)]")
             completion(.failure(AuthServiceError.invalidRequest))
-            
             return
         }
         
@@ -82,7 +81,7 @@ final class ProfileImageService {
                 )
                 
             case .failure(let error):
-                print("[ProfileImageService.fetchProfileImageURL]: Ошибка - \(error.localizedDescription)")
+                print("[ProfileImageService.fetchProfileImageURL]: NetworkError - \(error.localizedDescription) [username: \(username)]")
                 completion(.failure(error))
             }
         }

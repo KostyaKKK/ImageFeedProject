@@ -55,8 +55,15 @@ final class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
+    // MARK: - Private Properties
     private var profileImageServiceObserver: NSObjectProtocol?
+    // MARK: - Deinit
+    deinit {
+        if let observer = profileImageServiceObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+    }
+    
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -105,8 +112,7 @@ final class ProfileViewController: UIViewController {
             options: [
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
-                .cacheOriginalImage,
-                .forceRefresh
+                .cacheOriginalImage
             ]) { result in
 
                 switch result {
@@ -124,7 +130,8 @@ final class ProfileViewController: UIViewController {
 
                     // В случае ошибки
                 case .failure(let error):
-                    print(error)
+                    print("[ProfileViewController.updateAvatar]: NetworkError - \(error.localizedDescription)")
+
                 }
             }
     }

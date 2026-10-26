@@ -23,5 +23,12 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UNSPLASH_SECRET_KEY</key>
+	<string>$(UNSPLASH_SECRET_KEY)
+$(UNSPLASH_SECRET_KEY)
+$(UNSPLASH_SECRET_KEY)
+$(UNSPLASH_SECRET_KEY)
+$(UNSPLASH_SECRET_KEY)
+$(UNPLASH_SECRET_KEY)</string>
 </dict>
 </plist>
