@@ -516,6 +516,8 @@
 		};
 		FF262038304C326B0029F76C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = FFA44D463052878A00875B72 /* Application */;
+			baseConfigurationReferenceRelativePath = Configs.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -580,6 +582,8 @@
 		};
 		FF262039304C326B0029F76C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = FFA44D463052878A00875B72 /* Application */;
+			baseConfigurationReferenceRelativePath = Configs.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
