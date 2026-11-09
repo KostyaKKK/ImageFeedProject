@@ -103,4 +103,7 @@ final class ProfileImageService {
         
         return request
     }
+    func clearAvatar() {
+        avatarURL = nil
+    }
 }

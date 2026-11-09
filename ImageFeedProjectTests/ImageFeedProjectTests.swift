@@ -5,15 +5,24 @@
 //  Created by Константин Кащеев on 05.09.2026.
 //
 
-import Testing
 @testable import ImageFeedProject
+import XCTest
 
-struct ImageFeedProjectTests {
-
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-        // Swift Testing Documentation
-        // https://developer.apple.com/documentation/testing
+final class ImagesFeedProjectTests: XCTestCase {
+    func testFetchPhotos() {
+        let service = ImagesListService.shared 
+            
+            let expectation = self.expectation(description: "Wait for Notification")
+            NotificationCenter.default.addObserver(
+                forName: ImagesListService.didChangeNotification,
+                object: nil,
+                queue: .main) { _ in
+                    expectation.fulfill()
+                }
+            
+            service.fetchPhotosNextPage()
+            wait(for: [expectation], timeout: 10)
+            
+            XCTAssertEqual(service.photos.count, 10)
+        }
     }
-
-}

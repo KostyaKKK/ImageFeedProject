@@ -1,3 +1,5 @@
+//profileviewcontroller
+
 import UIKit
 import Kingfisher
 
@@ -57,6 +59,7 @@ final class ProfileViewController: UIViewController {
     }()
     // MARK: - Private Properties
     private var profileImageServiceObserver: NSObjectProtocol?
+    private var shimmerViews: [GradientAnimationView] = []
     // MARK: - Deinit
     deinit {
         if let observer = profileImageServiceObserver {
@@ -72,8 +75,8 @@ final class ProfileViewController: UIViewController {
         setupView()
         addSubviews()
         setupConstraints()
-        
-        // 1. Подписываемся на уведомление об изменении аватарки
+        showLoadingState()
+
         profileImageServiceObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
             object: nil,
@@ -86,10 +89,48 @@ final class ProfileViewController: UIViewController {
         // 2. Заполняем данные профиля, если они уже загружены
         if let profile = ProfileService.shared.profile {
             updateProfileDetails(profile: profile)
+            hideLoadingState()
         }
         
-        // 3. Загружаем аватарку, если её URL уже есть
         updateAvatar()
+    }
+    // MARK: - Animation Controls (Shimmer)
+    private func showLoadingState() {
+        // Убедимся, что размеры (bounds) сформированы
+        view.layoutIfNeeded()
+        
+        let viewsToAnimate: [(view: UIView, cornerRadius: CGFloat)] = [
+            (avatarImageView, 35),
+            (nameLabel, 9),
+            (userNameLabel, 6),
+            (descriptionLabel, 6)
+        ]
+        
+        for item in viewsToAnimate {
+            let shimmer = GradientAnimationView()
+            shimmer.translatesAutoresizingMaskIntoConstraints = false
+            shimmer.layer.cornerRadius = item.cornerRadius
+            shimmer.clipsToBounds = true
+            
+            item.view.addSubview(shimmer)
+            
+            NSLayoutConstraint.activate([
+                shimmer.topAnchor.constraint(equalTo: item.view.topAnchor),
+                shimmer.bottomAnchor.constraint(equalTo: item.view.bottomAnchor),
+                shimmer.leadingAnchor.constraint(equalTo: item.view.leadingAnchor),
+                shimmer.trailingAnchor.constraint(equalTo: item.view.trailingAnchor)
+            ])
+            
+            shimmer.startAnimating()
+            shimmerViews.append(shimmer)
+        }
+    }
+    private func hideLoadingState() {
+        shimmerViews.forEach { shimmer in
+            shimmer.stopAnimating()
+            shimmer.removeFromSuperview()
+        }
+        shimmerViews.removeAll()
     }
     
     // MARK: - Private Methods
@@ -113,41 +154,31 @@ final class ProfileViewController: UIViewController {
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage
-            ]) { result in
-
+            ]) { [weak self] result in
+                guard let self = self else { return }
+                self.hideLoadingState()
                 switch result {
                 case .success(let value):
-                    print(value.image)
-
-                    // Откуда картинка загружена:
-                    // - .none — из сети.
-                    // - .memory — из кэша оперативной памяти.
-                    // - .disk — из дискового кэша.
-                    print(value.cacheType)
-
-                    // Информация об источнике.
-                    print(value.source)
-
-                    // В случае ошибки
+                                    print("[ProfileViewController.updateAvatar]: Success loaded from \(value.cacheType)")
                 case .failure(let error):
                     print("[ProfileViewController.updateAvatar]: NetworkError - \(error.localizedDescription)")
-
+                    
                 }
             }
     }
     
     private func updateProfileDetails(profile: Profile) {
         nameLabel.text = profile.name.isEmpty
-            ? "Имя не указано"
-            : profile.name
+        ? "Имя не указано"
+        : profile.name
         
         userNameLabel.text = profile.loginName.isEmpty
-            ? "@неизвестный_пользователь"
-            : profile.loginName
+        ? "@неизвестный_пользователь"
+        : profile.loginName
         
         descriptionLabel.text = (profile.bio?.isEmpty ?? true)
-            ? "Профиль не заполнен"
-            : profile.bio
+        ? "Профиль не заполнен"
+        : profile.bio
     }
     
     private func setupView() {
@@ -195,6 +226,27 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func didTapLogoutButton() {
-        // TODO: Выход из аккаунта
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert
+        )
+        
+        let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+
+            ProfileLogoutService.shared.logout()
+
+            guard let window = UIApplication.shared.windows.first else { return }
+            window.rootViewController = SplashViewController()
+            window.makeKeyAndVisible()
+        }
+        
+        let noAction = UIAlertAction(title: "Нет", style: .cancel)
+        
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true)
     }
 }
