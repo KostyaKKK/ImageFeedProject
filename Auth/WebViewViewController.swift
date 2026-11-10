@@ -13,6 +13,7 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 final class WebViewViewController: UIViewController {
+    
     // MARK: - IBOutlets
     @IBOutlet private var webView: WKWebView!
     @IBOutlet private var progressView: UIProgressView!
@@ -26,9 +27,11 @@ final class WebViewViewController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         webView.navigationDelegate = self
         loadAuthView()
         
+        // «Новое» KVO API с использованием замыкания
         estimatedProgressObservation = webView.observe(
             \.estimatedProgress,
             options: [.new]
@@ -84,13 +87,9 @@ extension WebViewViewController: WKNavigationDelegate {
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
         if let code = code(from: navigationAction) {
-            // 1. Отключаем делегат, чтобы исключить дублирование вызовов при редиректе
             webView.navigationDelegate = nil
-            
-            // 2. Сообщаем WebKit об отмене загрузки этой страницы
             decisionHandler(.cancel)
             
-            // 3. Уведомляем делегат с небольшим сдвигом в главном потоке
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.delegate?.webViewViewController(self, didAuthenticateWithCode: code)
@@ -114,3 +113,4 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
 }
+

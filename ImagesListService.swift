@@ -28,12 +28,12 @@ final class ImagesListService {
         let nextPage = (lastLoadedPage ?? 0) + 1
         
         guard let token = tokenStorage.token else {
-            print("[ImagesListService.fetchPhotosNextPage]: Error - Auth token is missing")
+            print("[ImagesListService.fetchPhotosNextPage]: Network Error - Auth token is missing")
             return
         }
         
         guard let request = makePhotosRequest(page: nextPage, token: token) else {
-            print("[ImagesListService.fetchPhotosNextPage]: RequestError - Failed to create URLRequest")
+            print("[ImagesListService.fetchPhotosNextPage]: Request Error - Failed to create URLRequest")
             return
         }
         
@@ -54,7 +54,7 @@ final class ImagesListService {
                     )
                     
                 case .failure(let error):
-                    print("[ImagesListService.fetchPhotosNextPage]: Error - \(error.localizedDescription)")
+                    print("[ImagesListService.fetchPhotosNextPage]: Network Error - \(error.localizedDescription)")
                 }
             }
         }
@@ -68,7 +68,7 @@ final class ImagesListService {
         assert(Thread.isMainThread)
         
         guard let token = tokenStorage.token else {
-            print("[ImagesListService.changeLike]: Error - Auth token is missing")
+            print("[ImagesListService.changeLike]: Network Error - Auth token is missing")
             completion(.failure(NetworkError.invalidRequest))
             return
         }
@@ -88,14 +88,14 @@ final class ImagesListService {
                     let photo = self.photos[index]
                     
                     let newPhoto = Photo(
-                                id: photo.id,
-                                size: photo.size,
-                                createdAt: photo.createdAt,
-                                welcomeDescription: photo.welcomeDescription,
-                                thumbImageURL: photo.thumbImageURL,
-                                largeImageURL: photo.largeImageURL,
-                                isLiked: !photo.isLiked
-                            )
+                        id: photo.id,
+                        size: photo.size,
+                        createdAt: photo.createdAt,
+                        welcomeDescription: photo.welcomeDescription,
+                        thumbImageURL: photo.thumbImageURL,
+                        largeImageURL: photo.largeImageURL,
+                        isLiked: likeResult.photo.likedByUser
+                    )
                     
                     self.photos[index] = newPhoto
                 }

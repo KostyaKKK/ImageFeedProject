@@ -53,13 +53,14 @@ final class ImagesListCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
+        backgroundColor = .ypBlack
         selectionStyle = .none
         setupUI()
     }
-    
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        nil
+    
     }
     // MARK: - Lifecycle
     
@@ -80,7 +81,7 @@ final class ImagesListCell: UITableViewCell {
         cellImageView.kf.indicatorType = .activity
         cellImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(named: "stub"),
+            placeholder: UIImage(resource: .stub),
             options: []
         ) { [weak self] result in
             guard let self = self else { return }
@@ -127,7 +128,6 @@ final class ImagesListCell: UITableViewCell {
         
         let shimmer = GradientAnimationView()
         shimmer.translatesAutoresizingMaskIntoConstraints = false
-        // Важно: закругляем углы шиммера под углы cellImageView
         shimmer.layer.cornerRadius = 16
         shimmer.clipsToBounds = true
         

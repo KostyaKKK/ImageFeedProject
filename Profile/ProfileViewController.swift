@@ -76,7 +76,7 @@ final class ProfileViewController: UIViewController {
         addSubviews()
         setupConstraints()
         showLoadingState()
-
+        
         profileImageServiceObserver = NotificationCenter.default.addObserver(
             forName: ProfileImageService.didChangeNotification,
             object: nil,
@@ -159,7 +159,7 @@ final class ProfileViewController: UIViewController {
                 self.hideLoadingState()
                 switch result {
                 case .success(let value):
-                                    print("[ProfileViewController.updateAvatar]: Success loaded from \(value.cacheType)")
+                    print("[ProfileViewController.updateAvatar]: Success loaded from \(value.cacheType)")
                 case .failure(let error):
                     print("[ProfileViewController.updateAvatar]: NetworkError - \(error.localizedDescription)")
                     
@@ -234,10 +234,14 @@ final class ProfileViewController: UIViewController {
         
         let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
             guard let self = self else { return }
-
+            
             ProfileLogoutService.shared.logout()
-
-            guard let window = UIApplication.shared.windows.first else { return }
+            
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first else {
+                return
+            }
+            
             window.rootViewController = SplashViewController()
             window.makeKeyAndVisible()
         }
