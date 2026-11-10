@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF00E745309B509C0000672F /* GradientAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00E744309B509A0000672F /* GradientAnimationView.swift */; };
 		FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF589306BE567000FBA2D /* WebViewViewController.swift */; };
 		FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */; };
 		FF9B4013306D3995006FBB2A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF293CD7306D26D600659B40 /* WebKit.framework */; };
@@ -21,6 +22,10 @@
 		FFF8BCDD308CA55300C0B02E /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FFF8BCDC308CA55300C0B02E /* Kingfisher */; };
 		FFF8BCE0308CBF8600C0B02E /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = FFF8BCDF308CBF8600C0B02E /* SwiftKeychainWrapper */; };
 		FFF8BCE2308CC47300C0B02E /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8BCE1308CC46F00C0B02E /* TabBarController.swift */; };
+		FFF8BCE93094988C00C0B02E /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8BCE83094988700C0B02E /* ImagesListService.swift */; };
+		FFF8BCEB3094AB9800C0B02E /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8BCEA3094AB9600C0B02E /* PhotoResult.swift */; };
+		FFF8BCED3094AC3A00C0B02E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8BCEC3094AC3500C0B02E /* Photo.swift */; };
+		FFF8BCF1309B256100C0B02E /* ProfileLogoutService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF8BCF0309B255F00C0B02E /* ProfileLogoutService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FF00E744309B509A0000672F /* GradientAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientAnimationView.swift; sourceTree = "<group>"; };
 		FF262009304C326A0029F76C /* ImageFeedProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeedProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF262022304C326B0029F76C /* ImageFeedProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF26202C304C326B0029F76C /* ImageFeedProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,7 +62,10 @@
 		FFF8BCD3308648A500C0B02E /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		FFF8BCD930867B5C00C0B02E /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		FFF8BCE1308CC46F00C0B02E /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		FFF8BCE3308DFC3900C0B02E /* Untitled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Untitled.swift; sourceTree = "<group>"; };
+		FFF8BCE83094988700C0B02E /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
+		FFF8BCEA3094AB9600C0B02E /* PhotoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResult.swift; sourceTree = "<group>"; };
+		FFF8BCEC3094AC3500C0B02E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		FFF8BCF0309B255F00C0B02E /* ProfileLogoutService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLogoutService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -137,7 +146,11 @@
 		FF262000304C326A0029F76C = {
 			isa = PBXGroup;
 			children = (
-				FFF8BCE3308DFC3900C0B02E /* Untitled.swift */,
+				FF00E744309B509A0000672F /* GradientAnimationView.swift */,
+				FFF8BCF0309B255F00C0B02E /* ProfileLogoutService.swift */,
+				FFF8BCEC3094AC3500C0B02E /* Photo.swift */,
+				FFF8BCEA3094AB9600C0B02E /* PhotoResult.swift */,
+				FFF8BCE83094988700C0B02E /* ImagesListService.swift */,
 				FFF8BCE1308CC46F00C0B02E /* TabBarController.swift */,
 				FFF8BCD6308658E200C0B02E /* ServiceAccessLayer */,
 				FFF8BCD23086467000C0B02E /* Views */,
@@ -391,10 +404,15 @@
 			files = (
 				FF9B4015306E4F24006FBB2A /* OAuth2Service.swift in Sources */,
 				FF9B401C306E6961006FBB2A /* SplashViewController.swift in Sources */,
+				FFF8BCED3094AC3A00C0B02E /* Photo.swift in Sources */,
+				FF00E745309B509C0000672F /* GradientAnimationView.swift in Sources */,
 				FFF8BCE2308CC47300C0B02E /* TabBarController.swift in Sources */,
+				FFF8BCEB3094AB9800C0B02E /* PhotoResult.swift in Sources */,
 				FF9B4019306E53CF006FBB2A /* OAuth2TokenStorage.swift in Sources */,
+				FFF8BCF1309B256100C0B02E /* ProfileLogoutService.swift in Sources */,
 				FFF8BCDA30867B6200C0B02E /* ProfileImageService.swift in Sources */,
 				FF9B4017306E5163006FBB2A /* URLSession+data.swift in Sources */,
+				FFF8BCE93094988C00C0B02E /* ImagesListService.swift in Sources */,
 				FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */,
 				FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */,
 				FFF8BCD13086458B00C0B02E /* UIBlockingProgressHUD.swift in Sources */,
@@ -434,6 +452,8 @@
 /* Begin XCBuildConfiguration section */
 		FF262036304C326B0029F76C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = FFA44D463052878A00875B72 /* Application */;
+			baseConfigurationReferenceRelativePath = Configs.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,6 +495,8 @@
 		};
 		FF262037304C326B0029F76C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = FFA44D463052878A00875B72 /* Application */;
+			baseConfigurationReferenceRelativePath = Configs.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

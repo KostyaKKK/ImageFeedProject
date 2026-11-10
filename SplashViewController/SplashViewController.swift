@@ -71,13 +71,19 @@ final class SplashViewController: UIViewController {
         
         guard let navigationController = storyboard.instantiateViewController(withIdentifier: "AuthNavigationController") as? UINavigationController,
               let viewController = navigationController.viewControllers.first as? AuthViewController else {
-            assertionFailure("Failed to instantiate AuthViewController")
+            assertionFailure("Failed to instantiate AuthNavigationController")
             return
         }
         
         viewController.delegate = self
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if self.presentedViewController == nil {
+                self.present(navigationController, animated: true)
+            }
+        }
     }
     private func fetchProfile(token: String) {
         UIBlockingProgressHUD.show()
@@ -109,3 +115,4 @@ extension SplashViewController: AuthViewControllerDelegate {
         }
     }
 }
+

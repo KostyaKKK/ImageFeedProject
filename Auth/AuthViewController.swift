@@ -15,6 +15,8 @@ final class AuthViewController: UIViewController {
         super.viewDidLoad()
         
         configureBackButton()
+        print("[DEBUG] Secret Key value:", Constants.secretKey ?? "NIL")
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,8 +44,13 @@ final class AuthViewController: UIViewController {
 // MARK: - WebViewViewControllerDelegate
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
-        navigationController?.popViewController(animated: true)
+        // 1. Сначала скрываем WebView
+        vc.navigationController?.popViewController(animated: true)
+        
+        // 2. Показываем лоадер
         UIBlockingProgressHUD.show()
+        
+        // 3. Запрашиваем токен
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             UIBlockingProgressHUD.dismiss()
@@ -57,7 +64,10 @@ extension AuthViewController: WebViewViewControllerDelegate {
             case .failure(let error):
                 print("[AuthViewController]: Failed to fetch OAuth token with error - \(error.localizedDescription)")
                 
-                let alert = UIAlertController( // задача 5 с алертом
+                // В случае ошибки сбрасываем состояние OAuth2Service, чтобы дать пользователю возможность повторить попытку
+                OAuth2Service.shared.clean()
+                
+                let alert = UIAlertController(
                     title: "Что-то пошло не так(",
                     message: "Не удалось войти в систему",
                     preferredStyle: .alert
