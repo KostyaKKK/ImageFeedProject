@@ -47,10 +47,8 @@ extension AuthViewController: WebViewViewControllerDelegate {
         // 1. Сначала скрываем WebView
         vc.navigationController?.popViewController(animated: true)
         
-        // 2. Показываем лоадер
         UIBlockingProgressHUD.show()
         
-        // 3. Запрашиваем токен
         oauth2Service.fetchOAuthToken(code) { [weak self] result in
             guard let self = self else { return }
             UIBlockingProgressHUD.dismiss()
@@ -64,8 +62,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             case .failure(let error):
                 print("[AuthViewController]: Failed to fetch OAuth token with error - \(error.localizedDescription)")
                 
-                // В случае ошибки сбрасываем состояние OAuth2Service, чтобы дать пользователю возможность повторить попытку
-                OAuth2Service.shared.clean()
+                OAuth2Service.shared.clean() // Value of type 'OAuth2Service' has no member 'clean'
                 
                 let alert = UIAlertController(
                     title: "Что-то пошло не так(",

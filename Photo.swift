@@ -16,7 +16,10 @@ struct Photo {
     let largeImageURL: String
     let isLiked: Bool
     
-    // Основной инициализатор для поэлементного создания/копирования
+    private static let dateFormatter: ISO8601DateFormatter = { return ISO8601DateFormatter()
+        
+    }()
+    
     init(
         id: String,
         size: CGSize,
@@ -35,14 +38,12 @@ struct Photo {
         self.isLiked = isLiked
     }
     
-    // Вспомогательный инициализатор из сетевой модели PhotoResult
     init(result: PhotoResult) {
         self.id = result.id
         self.size = CGSize(width: result.width, height: result.height)
         
-        // Преобразуем строковую дату в Date (если у вас используется ISO8601DateFormatter)
         if let createdAtString = result.createdAt {
-            self.createdAt = ISO8601DateFormatter().date(from: createdAtString)
+            self.createdAt = Photo.dateFormatter.date(from: createdAtString)
         } else {
             self.createdAt = nil
         }

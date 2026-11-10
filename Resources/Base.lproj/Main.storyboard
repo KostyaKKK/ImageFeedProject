@@ -41,7 +41,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="iHg-6B-RAp"/>
                     <connections>
-                        <segue destination="v4F-4x-0fi" kind="presentation" identifier="ShowSingleImage" id="lMg-zc-rdM"/>
+                        <segue destination="v4F-4x-0fi" kind="presentation" identifier="ShowSingleImage" modalPresentationStyle="fullScreen" modalTransitionStyle="coverVertical" id="lMg-zc-rdM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -59,7 +59,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNT-z7-AaU">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-Mk-MuJ">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="414" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-Mk-MuJ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" name="YP Black"/>
@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDu-aI-38p">
-                                <rect key="frame" x="32" y="75" width="48" height="48"/>
+                                <rect key="frame" x="8" y="68" width="48" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="7R3-ql-1a4"/>
                                     <constraint firstAttribute="height" constant="48" id="HNJ-Kb-0T0"/>
@@ -101,8 +101,8 @@
                             <constraint firstItem="dNT-z7-AaU" firstAttribute="bottom" secondItem="yNm-6m-TWV" secondAttribute="bottom" id="N07-Eu-zWg"/>
                             <constraint firstItem="AHa-E4-JMp" firstAttribute="centerX" secondItem="yNm-6m-TWV" secondAttribute="centerX" id="P5l-0L-I0q"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="bottom" secondItem="AHa-E4-JMp" secondAttribute="bottom" constant="30" id="Pm2-Db-aLP"/>
-                            <constraint firstItem="wDu-aI-38p" firstAttribute="top" secondItem="yNm-6m-TWV" secondAttribute="top" constant="16" id="WTA-gY-IwC"/>
-                            <constraint firstItem="wDu-aI-38p" firstAttribute="leading" secondItem="WvL-gp-Kdo" secondAttribute="leadingMargin" constant="16" id="hPc-1M-Frr"/>
+                            <constraint firstItem="wDu-aI-38p" firstAttribute="top" secondItem="yNm-6m-TWV" secondAttribute="top" constant="9" id="WTA-gY-IwC"/>
+                            <constraint firstItem="wDu-aI-38p" firstAttribute="leading" secondItem="yNm-6m-TWV" secondAttribute="leading" constant="8" id="hPc-1M-Frr"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="trailing" secondItem="dNT-z7-AaU" secondAttribute="trailing" id="o6X-lp-2dP"/>
                             <constraint firstItem="yNm-6m-TWV" firstAttribute="top" secondItem="dNT-z7-AaU" secondAttribute="top" id="ufq-P3-nPI"/>
                         </constraints>
