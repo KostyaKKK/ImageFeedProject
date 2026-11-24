@@ -21,7 +21,6 @@ struct ProfileImage: Codable {
 
 // MARK: - Models
 
-/// Структура для декодирования ответа Unsplash API (GET /users/:username)
 struct UserResult: Codable {
     let profileImage: ProfileImage
     
@@ -44,12 +43,9 @@ final class ProfileImageService {
     
     private(set) var avatarURL: String?
     
-    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange") // нотификация
-    
-    /// Загрузка URL аватарки пользователя
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         
-        // Предотвращение гонки: отменяем предыдущую незавершенную таску
         task?.cancel()
         
         guard let token = tokenStorage.token else {
@@ -90,7 +86,7 @@ final class ProfileImageService {
         task.resume()
     }
     
-    /// Создание URLRequest для эндпоинта GET /users/:username
+ 
     private func makeProfileImageRequest(username: String, token: String) -> URLRequest? {
         guard let url = URL(string: "https://api.unsplash.com/users/\(username)") else {
             print("[ProfileImageService.makeProfileImageRequest]: Failed to create URL for username: \(username)")

@@ -3,8 +3,8 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
-    
+final class ProfileViewController: UIViewController, ProfileViewProtocol {
+
     // MARK: - Elements
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
+
     private lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
         let icon = UIImage(named: "Exit")
@@ -25,21 +25,18 @@ final class ProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-    private lazy var nameLabel: UILabel = {
+
+    lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .ypWhite
         label.text = "Екатерина Новикова"
         label.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         label.numberOfLines = 0
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.maximumLineHeight = 18
-        paragraphStyle.minimumLineHeight = 18
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private lazy var userNameLabel: UILabel = {
+
+    lazy var userNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .ypGrey
@@ -47,8 +44,8 @@ final class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private lazy var descriptionLabel: UILabel = {
+
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         label.textColor = .ypWhite
@@ -57,94 +54,51 @@ final class ProfileViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+
+    // MARK: - Public Properties
+    var presenter: ProfilePresenterProtocol?
+
     // MARK: - Private Properties
     private var profileImageServiceObserver: NSObjectProtocol?
-    private var shimmerViews: [GradientAnimationView] = []
+    private let shimmerHelper = ProfileShimmerHelper()
+
     // MARK: - Deinit
     deinit {
         if let observer = profileImageServiceObserver {
             NotificationCenter.default.removeObserver(observer)
         }
     }
-    
-    
+
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        if presenter == nil {
+            let presenter = ProfilePresenter()
+            presenter.view = self
+            self.presenter = presenter
+        }
+
         setupView()
         addSubviews()
         setupConstraints()
-        showLoadingState()
-        
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.updateAvatar()
-        }
-        
-        // 2. Заполняем данные профиля, если они уже загружены
-        if let profile = ProfileService.shared.profile {
-            updateProfileDetails(profile: profile)
-            hideLoadingState()
-        }
-        
-        updateAvatar()
+        observeAvatarUpdates()
+
+        presenter?.viewDidLoad()
     }
-    // MARK: - Animation Controls (Shimmer)
-    private func showLoadingState() {
-        // Убедимся, что размеры (bounds) сформированы
-        view.layoutIfNeeded()
-        
-        let viewsToAnimate: [(view: UIView, cornerRadius: CGFloat)] = [
-            (avatarImageView, 35),
-            (nameLabel, 9),
-            (userNameLabel, 6),
-            (descriptionLabel, 6)
-        ]
-        
-        for item in viewsToAnimate {
-            let shimmer = GradientAnimationView()
-            shimmer.translatesAutoresizingMaskIntoConstraints = false
-            shimmer.layer.cornerRadius = item.cornerRadius
-            shimmer.clipsToBounds = true
-            
-            item.view.addSubview(shimmer)
-            
-            NSLayoutConstraint.activate([
-                shimmer.topAnchor.constraint(equalTo: item.view.topAnchor),
-                shimmer.bottomAnchor.constraint(equalTo: item.view.bottomAnchor),
-                shimmer.leadingAnchor.constraint(equalTo: item.view.leadingAnchor),
-                shimmer.trailingAnchor.constraint(equalTo: item.view.trailingAnchor)
-            ])
-            
-            shimmer.startAnimating()
-            shimmerViews.append(shimmer)
-        }
+
+    // MARK: - ProfileViewProtocol
+    func updateProfileDetails(name: String, loginName: String, bio: String) {
+        nameLabel.text = name
+        userNameLabel.text = loginName
+        descriptionLabel.text = bio
     }
-    private func hideLoadingState() {
-        shimmerViews.forEach { shimmer in
-            shimmer.stopAnimating()
-            shimmer.removeFromSuperview()
-        }
-        shimmerViews.removeAll()
-    }
-    
-    // MARK: - Private Methods
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
-        print("url: \(url)")
-        
+
+    func updateAvatar(url: URL) {
         let placeholderImage = UIImage(systemName: "person.circle.fill")?
             .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
             .withConfiguration(UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large))
-        
+
         let processor = RoundCornerImageProcessor(cornerRadius: 35)
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(
@@ -154,37 +108,79 @@ final class ProfileViewController: UIViewController {
                 .processor(processor),
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage
-            ]) { [weak self] result in
-                guard let self = self else { return }
-                self.hideLoadingState()
-                switch result {
-                case .success(let value):
-                    print("[ProfileViewController.updateAvatar]: Success loaded from \(value.cacheType)")
-                case .failure(let error):
-                    print("[ProfileViewController.updateAvatar]: NetworkError - \(error.localizedDescription)")
-                    
-                }
+            ]
+        ) { [weak self] result in
+            guard let self else { return }
+            self.presenter?.didFinishAvatarLoading()
+            switch result {
+            case .success(let value):
+                print("[ProfileViewController.updateAvatar]: Success loaded from \(value.cacheType)")
+            case .failure(let error):
+                print("[ProfileViewController.updateAvatar]: NetworkError - \(error.localizedDescription)")
             }
+        }
     }
-    
-    private func updateProfileDetails(profile: Profile) {
-        nameLabel.text = profile.name.isEmpty
-        ? "Имя не указано"
-        : profile.name
-        
-        userNameLabel.text = profile.loginName.isEmpty
-        ? "@неизвестный_пользователь"
-        : profile.loginName
-        
-        descriptionLabel.text = (profile.bio?.isEmpty ?? true)
-        ? "Профиль не заполнен"
-        : profile.bio
+
+    func showLoadingState() {
+        view.layoutIfNeeded()
+        shimmerHelper.show(on: [
+            (avatarImageView, 35),
+            (nameLabel, 9),
+            (userNameLabel, 6),
+            (descriptionLabel, 6)
+        ])
     }
-    
+
+    func hideLoadingState() {
+        shimmerHelper.hide()
+    }
+
+    func showLogoutAlert() {
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert
+        )
+
+        let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            guard let self else { return }
+            self.presenter?.didConfirmLogout()
+        }
+
+        let noAction = UIAlertAction(title: "Нет", style: .cancel)
+
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+
+        present(alert, animated: true)
+    }
+
+    func switchToSplashScreen() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+
+        window.rootViewController = SplashViewController()
+        window.makeKeyAndVisible()
+    }
+
+    // MARK: - Private Methods
+    private func observeAvatarUpdates() {
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.presenter?.didUpdateAvatarNotification()
+        }
+    }
+
     private func setupView() {
         view.backgroundColor = .ypBlack
     }
-    
+
     private func addSubviews() {
         view.addSubview(avatarImageView)
         view.addSubview(logoutButton)
@@ -192,65 +188,35 @@ final class ProfileViewController: UIViewController {
         view.addSubview(userNameLabel)
         view.addSubview(descriptionLabel)
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Констрейты аватарки (70x70)
             avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             avatarImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 70),
             avatarImageView.heightAnchor.constraint(equalToConstant: 70),
-            
-            // Кнопка выхода
+
             logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
             logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             logoutButton.widthAnchor.constraint(equalToConstant: 44),
             logoutButton.heightAnchor.constraint(equalToConstant: 44),
-            
-            // Имя
+
             nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
             nameLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             nameLabel.trailingAnchor.constraint(equalTo: logoutButton.trailingAnchor),
-            
-            // Никнейм (@)
+
             userNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             userNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             userNameLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor),
-            
-            // Статус / описание
+
             descriptionLabel.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 8),
             descriptionLabel.leadingAnchor.constraint(equalTo: avatarImageView.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: nameLabel.trailingAnchor)
         ])
     }
-    
+
     // MARK: - Actions
     @objc private func didTapLogoutButton() {
-        let alert = UIAlertController(
-            title: "Пока, пока!",
-            message: "Уверены, что хотите выйти?",
-            preferredStyle: .alert
-        )
-        
-        let yesAction = UIAlertAction(title: "Да", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            
-            ProfileLogoutService.shared.logout()
-            
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = windowScene.windows.first else {
-                return
-            }
-            
-            window.rootViewController = SplashViewController()
-            window.makeKeyAndVisible()
-        }
-        
-        let noAction = UIAlertAction(title: "Нет", style: .cancel)
-        
-        alert.addAction(yesAction)
-        alert.addAction(noAction)
-        
-        present(alert, animated: true)
+        presenter?.didTapLogoutButton()
     }
 }

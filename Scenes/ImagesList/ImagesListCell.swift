@@ -75,30 +75,34 @@ final class ImagesListCell: UITableViewCell {
     func configure(with photo: Photo, dateString: String) {
         dateLabel.text = dateString
         setIsLiked(photo.isLiked)
-        
-        guard let url = URL(string: photo.thumbImageURL) else { return }
+
+        guard let url = URL(string: photo.thumbImageURL) else {
+            setCellState(.error)
+            return
+        }
+
         setCellState(.loading)
         cellImageView.kf.indicatorType = .activity
         cellImageView.kf.setImage(
             with: url,
-            placeholder: UIImage(resource: .stub),
+            placeholder: nil,
             options: []
         ) { [weak self] result in
-            guard let self = self else { return }
-            
+            guard let self else { return }
+
             switch result {
             case .success(let value):
-                // Загрузка завершена успешно
                 self.setCellState(.finished(value.image))
             case .failure:
-                // Ошибка загрузки
                 self.setCellState(.error)
             }
         }
     }
+
     func setCellState(_ state: FeedCellImageState) {
         switch state {
         case .loading:
+            cellImageView.image = nil
             startShimmer()
         case .finished(let image):
             stopShimmer()
@@ -125,21 +129,21 @@ final class ImagesListCell: UITableViewCell {
     // MARK: - Private Shimmer Helpers
     private func startShimmer() {
         guard shimmerView == nil else { return }
-        
+
         let shimmer = GradientAnimationView()
         shimmer.translatesAutoresizingMaskIntoConstraints = false
         shimmer.layer.cornerRadius = 16
         shimmer.clipsToBounds = true
-        
+
         cellImageView.addSubview(shimmer)
-        
+
         NSLayoutConstraint.activate([
             shimmer.topAnchor.constraint(equalTo: cellImageView.topAnchor),
             shimmer.bottomAnchor.constraint(equalTo: cellImageView.bottomAnchor),
             shimmer.leadingAnchor.constraint(equalTo: cellImageView.leadingAnchor),
             shimmer.trailingAnchor.constraint(equalTo: cellImageView.trailingAnchor)
         ])
-        
+
         shimmer.startAnimating()
         self.shimmerView = shimmer
     }

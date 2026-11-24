@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FF00E745309B509C0000672F /* GradientAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00E744309B509A0000672F /* GradientAnimationView.swift */; };
+		FF989A6D30B17F2000E0A3AC /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */; };
+		FF989A6F30B18F3F00E0A3AC /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */; };
 		FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF589306BE567000FBA2D /* WebViewViewController.swift */; };
 		FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */; };
 		FF9B4013306D3995006FBB2A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF293CD7306D26D600659B40 /* WebKit.framework */; };
@@ -54,6 +56,8 @@
 		FF2AF4DB306A988F000FBA2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ImageFeedProject/Info.plist; sourceTree = "<group>"; };
 		FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		FF2AF589306BE567000FBA2D /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
+		FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
 		FF9B4014306E4F21006FBB2A /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		FF9B4016306E515E006FBB2A /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		FF9B4018306E53BD006FBB2A /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
@@ -147,10 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				FF00E744309B509A0000672F /* GradientAnimationView.swift */,
-				FFF8BCF0309B255F00C0B02E /* ProfileLogoutService.swift */,
-				FFF8BCEC3094AC3500C0B02E /* Photo.swift */,
-				FFF8BCEA3094AB9600C0B02E /* PhotoResult.swift */,
-				FFF8BCE83094988700C0B02E /* ImagesListService.swift */,
 				FFF8BCE1308CC46F00C0B02E /* TabBarController.swift */,
 				FFF8BCD6308658E200C0B02E /* ServiceAccessLayer */,
 				FFF8BCD23086467000C0B02E /* Views */,
@@ -189,10 +189,22 @@
 		FF2AF587306BE4F5000FBA2D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */,
+				FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */,
 				FF2AF589306BE567000FBA2D /* WebViewViewController.swift */,
 				FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		FF989A7030B1A48C00E0A3AC /* PhotoList */ = {
+			isa = PBXGroup;
+			children = (
+				FFF8BCE83094988700C0B02E /* ImagesListService.swift */,
+				FFF8BCEC3094AC3500C0B02E /* Photo.swift */,
+				FFF8BCEA3094AB9600C0B02E /* PhotoResult.swift */,
+			);
+			path = PhotoList;
 			sourceTree = "<group>";
 		};
 		FF9B401A306E600A006FBB2A /* SplashViewController */ = {
@@ -216,6 +228,7 @@
 			children = (
 				FFF8BCD3308648A500C0B02E /* ProfileService.swift */,
 				FFF8BCD930867B5C00C0B02E /* ProfileImageService.swift */,
+				FFF8BCF0309B255F00C0B02E /* ProfileLogoutService.swift */,
 			);
 			path = ProfileService;
 			sourceTree = "<group>";
@@ -223,6 +236,7 @@
 		FFF8BCD6308658E200C0B02E /* ServiceAccessLayer */ = {
 			isa = PBXGroup;
 			children = (
+				FF989A7030B1A48C00E0A3AC /* PhotoList */,
 				FFF8BCD83086593400C0B02E /* OAuth2 */,
 				FFF8BCD73086591F00C0B02E /* Network */,
 				FFF8BCD5308658BE00C0B02E /* ProfileService */,
@@ -406,6 +420,8 @@
 				FF9B401C306E6961006FBB2A /* SplashViewController.swift in Sources */,
 				FFF8BCED3094AC3A00C0B02E /* Photo.swift in Sources */,
 				FF00E745309B509C0000672F /* GradientAnimationView.swift in Sources */,
+				FF989A6D30B17F2000E0A3AC /* WebViewPresenter.swift in Sources */,
+				FF989A6F30B18F3F00E0A3AC /* AuthHelper.swift in Sources */,
 				FFF8BCE2308CC47300C0B02E /* TabBarController.swift in Sources */,
 				FFF8BCEB3094AB9800C0B02E /* PhotoResult.swift in Sources */,
 				FF9B4019306E53CF006FBB2A /* OAuth2TokenStorage.swift in Sources */,
