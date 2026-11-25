@@ -83,6 +83,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDu-aI-38p">
                                 <rect key="frame" x="8" y="68" width="48" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="nav_back_button"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="48" id="7R3-ql-1a4"/>
                                     <constraint firstAttribute="height" constant="48" id="HNJ-Kb-0T0"/>
@@ -134,6 +135,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdk-zf-nxj">
                                 <rect key="frame" x="16" y="612" width="361" height="48"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Authenticate"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="FIH-0A-h6M"/>
                                 </constraints>
@@ -170,8 +172,8 @@
         <!--Web View View Controller-->
         <scene sceneID="or6-TD-fSg">
             <objects>
-                <viewController id="yuG-cL-9Mk" customClass="WebViewViewController" customModule="ImageFeedProject" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2Hh-6H-OMb">
+                <viewController restorationIdentifier="WebViewViewController" storyboardIdentifier="WebViewViewController" id="yuG-cL-9Mk" customClass="WebViewViewController" customModule="ImageFeedProject" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="UnsplashWebView" id="2Hh-6H-OMb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -190,6 +192,9 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cfm-0p-SXc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="UnsplashWebView">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="5ct-Kv-EiR" firstAttribute="leading" secondItem="Cfm-0p-SXc" secondAttribute="leading" id="D6P-eK-adn"/>
                             <constraint firstItem="hAn-V0-1HV" firstAttribute="leading" secondItem="Cfm-0p-SXc" secondAttribute="leading" id="Kg9-TI-paD"/>
