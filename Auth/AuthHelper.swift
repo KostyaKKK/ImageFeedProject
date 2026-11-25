@@ -37,14 +37,18 @@ final class AuthHelper: AuthHelperProtocol {
         return urlComponents.url
     }
     func code(from url: URL) -> String? {
-        if let urlComponents = URLComponents(string: url.absoluteString),
-           urlComponents.path == "/oauth/authorize/native",
-           let items = urlComponents.queryItems,
-           let codeItem = items.first(where: { $0.name == "code" })
-        {
-            return codeItem.value
-        } else {
+        guard
+            let components = URLComponents(
+                url: url,
+                resolvingAgainstBaseURL: false
+            ),
+            components.path == "/oauth/authorize/native"
+        else {
             return nil
         }
-    } 
+
+        return components.queryItems?
+            .first(where: { $0.name == "code" })?
+            .value
+    }
 }

@@ -8,24 +8,45 @@
 @testable import ImageFeedProject
 import XCTest
 
-final class AuthHelperTests: XCTestCase {
+final class WebViewPresenterTests: XCTestCase {
 
-    func testCodeFromURL() {
+    func testPresenterCallsLoadRequest() {
         // given
-        var urlComponents = URLComponents(string: "https://unsplash.com/oauth/authorize/native")
-        urlComponents?.queryItems = [
-            URLQueryItem(name: "code", value: "test code")
-        ]
-        guard let url = urlComponents?.url else {
-            XCTFail("Failed to construct URL from URLComponents")
-            return
-        }
+        let viewController = WebViewViewControllerSpy()
         let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+        viewController.presenter = presenter
+        presenter.view = viewController
 
         // when
-        let code = authHelper.code(from: url)
+        presenter.viewDidLoad()
 
         // then
-        XCTAssertEqual(code, "test code")
+        XCTAssertTrue(viewController.loadRequestCalled)
     }
+
+    func testProgressHiddenWhenOne() {
+        // given
+        let authHelper = AuthHelper()
+        let presenter = WebViewPresenter(authHelper: authHelper)
+
+        // when
+        let result = presenter.shouldHideProgress(for: 1.0)
+
+        // then
+        XCTAssertTrue(result)
+    }
+}
+
+private final class WebViewViewControllerSpy: WebViewViewControllerProtocol {
+    var presenter: WebViewPresenterProtocol?
+    var loadRequestCalled = false
+
+    func load(request: URLRequest) {
+        loadRequestCalled = true
+    }
+
+    func setProgressValue(_ newValue: Float) {}
+
+    func setProgressHidden(_ isHidden: Bool) {}
 }

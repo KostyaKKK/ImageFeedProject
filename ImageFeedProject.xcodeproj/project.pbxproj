@@ -10,6 +10,7 @@
 		FF00E745309B509C0000672F /* GradientAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF00E744309B509A0000672F /* GradientAnimationView.swift */; };
 		FF989A6D30B17F2000E0A3AC /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */; };
 		FF989A6F30B18F3F00E0A3AC /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */; };
+		FF989A8F30B5F1BD00E0A3AC /* WebViewPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF989A8E30B5F1BA00E0A3AC /* WebViewPresenterProtocol.swift */; };
 		FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF589306BE567000FBA2D /* WebViewViewController.swift */; };
 		FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */; };
 		FF9B4013306D3995006FBB2A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF293CD7306D26D600659B40 /* WebKit.framework */; };
@@ -58,6 +59,7 @@
 		FF2AF589306BE567000FBA2D /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		FF989A8E30B5F1BA00E0A3AC /* WebViewPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterProtocol.swift; sourceTree = "<group>"; };
 		FF9B4014306E4F21006FBB2A /* OAuth2Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2Service.swift; sourceTree = "<group>"; };
 		FF9B4016306E515E006FBB2A /* URLSession+data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+data.swift"; sourceTree = "<group>"; };
 		FF9B4018306E53BD006FBB2A /* OAuth2TokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuth2TokenStorage.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				FF989A6E30B18F3D00E0A3AC /* AuthHelper.swift */,
 				FF989A6C30B17F1D00E0A3AC /* WebViewPresenter.swift */,
+				FF989A8E30B5F1BA00E0A3AC /* WebViewPresenterProtocol.swift */,
 				FF2AF589306BE567000FBA2D /* WebViewViewController.swift */,
 				FF2AF588306BE4FE000FBA2D /* AuthViewController.swift */,
 			);
@@ -429,6 +432,7 @@
 				FFF8BCDA30867B6200C0B02E /* ProfileImageService.swift in Sources */,
 				FF9B4017306E5163006FBB2A /* URLSession+data.swift in Sources */,
 				FFF8BCE93094988C00C0B02E /* ImagesListService.swift in Sources */,
+				FF989A8F30B5F1BD00E0A3AC /* WebViewPresenterProtocol.swift in Sources */,
 				FF9B4011306D2E9C006FBB2A /* WebViewViewController.swift in Sources */,
 				FF9B4012306D2EA3006FBB2A /* AuthViewController.swift in Sources */,
 				FFF8BCD13086458B00C0B02E /* UIBlockingProgressHUD.swift in Sources */,
